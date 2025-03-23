@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Contador de Pasos',
+      title: 'CONTADOR DE PASOS',
       theme: ThemeData.dark().copyWith(
         primaryColor: Colors.blue,
         colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.green),
