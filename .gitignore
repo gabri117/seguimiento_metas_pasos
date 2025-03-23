@@ -1,0 +1,21 @@
+# Archivos de dependencias y compilación
+.dart_tool/
+.build/
+.packages
+pubspec.lock
+
+# Archivos de caché
+*.log
+*.lock
+
+# Configuración de IDEs
+.vscode/
+.idea/
+
+# Plataformas nativas (opcional, si no las modificarás)
+android/
+ios/
+linux/
+macos/
+windows/
+web/
