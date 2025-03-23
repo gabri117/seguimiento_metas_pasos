@@ -19,3 +19,9 @@ linux/
 macos/
 windows/
 web/
+
+# Ignorar archivos generados automáticamente
+/build/
+*.log
+*.tmp
+*.lock
