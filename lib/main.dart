@@ -11,7 +11,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Contador de Pasos',
-      theme: ThemeData.dark(), // Modo oscuro
+      theme: ThemeData.dark().copyWith(
+        primaryColor: Colors.blue,
+        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.green),
+        scaffoldBackgroundColor: Colors.grey[900],
+        textTheme: TextTheme(
+          bodyLarge: TextStyle(fontFamily: 'RobotMono', fontSize: 16),
+          bodyMedium: TextStyle(fontFamily: 'RobotMono', fontSize: 14),
+          titleLarge: TextStyle(fontFamily: 'RobotMono', fontSize: 24),
+        ),
+      ),
       home: HomeScreen(),
     );
   }
@@ -44,7 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('CONTADOR DE PASOS'),
+        title: Text(
+          'CONTADOR DE PASOS',
+          style: TextStyle(fontFamily: 'RobotMono'),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -54,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
               controller: _metaController,
               decoration: InputDecoration(
                 labelText: 'Meta Diaria de Pasos',
+                labelStyle: TextStyle(color: Colors.blue),
                 border: OutlineInputBorder(),
                 errorText: _metaDiaria < 0 ? 'La meta no puede ser negativa' : null,
               ),
@@ -74,13 +87,17 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 20),
             Text(
               'Pasos: $_pasos',
-              style: TextStyle(fontSize: 24),
+              style: TextStyle(
+                fontFamily: 'RobotMono',
+                fontSize: 24,
+                color: Colors.white,
+              ),
             ),
             SizedBox(height: 20),
             Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.grey[800], // Fondo más oscuro
+                color: Colors.grey[800],
                 borderRadius: BorderRadius.circular(10),
               ),
               child: LinearProgressIndicator(
@@ -95,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(
+                ElevatedButton.icon(
                   onPressed: () {
                     setState(() {
                       _pasos++;
@@ -104,50 +121,53 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
                     });
                   },
+                  icon: Icon(Icons.add), // Icono de "Sumar"
+                  label: Text('Sumar Paso'), // Texto del botón
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue, // Color de fondo
-                    foregroundColor: Colors.white, // Color del texto
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10), // Bordes redondeados
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: Text('Sumar Paso'),
                 ),
-                ElevatedButton(
+                ElevatedButton.icon(
                   onPressed: () {
                     setState(() {
                       if (_pasos > 0) _pasos--;
                     });
                   },
+                  icon: Icon(Icons.remove), // Icono de "Restar"
+                  label: Text('Restar Paso'), // Texto del botón
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red, // Color de fondo
-                    foregroundColor: Colors.white, // Color del texto
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10), // Bordes redondeados
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: Text('Restar Paso'),
                 ),
               ],
             ),
             SizedBox(height: 20),
-            ElevatedButton(
+            ElevatedButton.icon(
               onPressed: () {
                 setState(() {
                   _pasos = 0;
                 });
               },
+              icon: Icon(Icons.refresh), // Icono de "Reiniciar"
+              label: Text('Reiniciar Contador'), // Texto del botón
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.grey[700], // Color de fondo
-                foregroundColor: Colors.white, // Color del texto
+                backgroundColor: Colors.grey[700],
+                foregroundColor: Colors.white,
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Bordes redondeados
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: Text('Reiniciar Contador'),
             ),
           ],
         ),
