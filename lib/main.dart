@@ -30,6 +30,16 @@ class _HomeScreenState extends State<HomeScreen> {
   int _metaDiaria = 0;
   final TextEditingController _metaController = TextEditingController();
 
+  void _mostrarMensajeMetaCumplida(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('¡Felicitaciones! Has alcanzado tu meta de pasos.'),
+        duration: Duration(seconds: 3),
+        backgroundColor: Colors.green,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,8 +99,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   onPressed: () {
                     setState(() {
                       _pasos++;
+                      if (_metaDiaria > 0 && _pasos >= _metaDiaria) {
+                        _mostrarMensajeMetaCumplida(context);
+                      }
                     });
                   },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue, // Color de fondo
+                    foregroundColor: Colors.white, // Color del texto
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10), // Bordes redondeados
+                    ),
+                  ),
                   child: Text('Sumar Paso'),
                 ),
                 ElevatedButton(
@@ -99,6 +120,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       if (_pasos > 0) _pasos--;
                     });
                   },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red, // Color de fondo
+                    foregroundColor: Colors.white, // Color del texto
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10), // Bordes redondeados
+                    ),
+                  ),
                   child: Text('Restar Paso'),
                 ),
               ],
@@ -110,6 +139,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   _pasos = 0;
                 });
               },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey[700], // Color de fondo
+                foregroundColor: Colors.white, // Color del texto
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10), // Bordes redondeados
+                ),
+              ),
               child: Text('Reiniciar Contador'),
             ),
           ],
